@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Book List</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+</head>
+<body>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">JBC Library</h1>
+        <p class="lead">All the books you need!</p>
+    </div>
+</div>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!--<a class="navbar-brand" href="#">JBC Library</a> -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="nav nav-tabs">
+            <!--<ul class="navbar-nav">-->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="listbook.html">List Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="addbook.html">Add a Book</a>
+            </li>
+            <li class="nav-item active nav-pills">
+                <a class="nav-link active" href="borrowbook.html">Borrow a book</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="returnbook.html">Return a book</a>
+            </li>
+            <!-- <li class="nav-item">
+                 <a class="nav-link disabled" href="#">Disabled</a>
+             </li>-->
+        </ul>
+    </div>
+</nav>
+
+
+
+    <ul th:each="book : ${availables}">
+    <li th:inline="text">Title [[${book.getTitle()}]]</li>
+    <li th:inline="text"> Available [[${book.getIsAvailable()}]]</li>
+
+
+    <form th:action="@{/borrowbook}" th:method="post">
+        <input type="hidden"  name="id" th:value="${book.id}" />
+        <input type="submit" value="Borrow this book" />
+    </form>
+    </ul>
+
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
